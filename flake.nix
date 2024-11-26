@@ -100,6 +100,17 @@
           };
           extraSpecialArgs = {};
         };
+        coqNixvimModule = {
+          inherit pkgs;
+          module = {pkgs,...}: {
+            imports = [
+              ./config
+              ./config/coq
+            ];
+            extraPackages = with pkgs; [sops];
+          };
+          extraSpecialArgs = {};
+        };
         pkgs = import inputs.nixpkgs {
           inherit system overlays;
           config.allowUnfree = true;
@@ -111,6 +122,7 @@
         pythonNvim = nixvim'.makeNixvimWithModule pythonNixvimModule;
         javascriptNvim = nixvim'.makeNixvimWithModule javascriptNixvimModule;
         iacNvim = nixvim'.makeNixvimWithModule iacNixvimModule;
+        coqNvim = nixvim'.makeNixvimWithModule coqNixvimModule;
       in {
         checks = {
           # Run `nix flake check .` to verify that your config is not broken
@@ -131,6 +143,8 @@
           javascript = javascriptNvim;
           # Lets you run `nix run .#javascript` to start nixvim with IaC configuration
           iac = iacNvim;
+          # Lets you run `nix run .#coq` to start nixvim with Coq configuration
+          coq = coqNvim;
         };
       };
     };

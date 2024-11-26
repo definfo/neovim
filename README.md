@@ -83,3 +83,4 @@ And add it to your home-manager imports:
 | Nginx      |              | nginx-language-server              |                 | iac               |
 | Helm       |              | helm-ls                            |                 | iac               |
 | Dockerfile |              | dockerls                           |                 | iac               |
+| Coq        |              | Coqtail                            |                 | coq               |
